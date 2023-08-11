@@ -1,0 +1,24 @@
+create DATABASE test2;//
+CREATE TABLE customer(
+    ctID integer not null AUTO_INCREMENT PRIMARY KEY,
+    ctName varchar(50),
+    ctAddress varchar(50));//
+use test2;
+CREATE TABLE product(
+    pdID varchar(50) not null PRIMARY KEY,
+    pdName varchar(50),
+    price char(50));//
+use test2;
+create TABLE oder(
+    odID integer  AUTO_INCREMENT PRIMARY KEY,
+    odDate date,
+    ctID integer not null,
+    FOREIGN KEY (ctID) REFERENCES customer(ctID));//
+use test2;
+create TABLE orderitem(
+    odID integer ,
+    pdID varchar(50) not null,
+    quantity integer not null,
+    FOREIGN KEY (odID) REFERENCES oder(odID),
+    FOREIGN KEY (pdID) REFERENCES product(pdID));//
+

@@ -1,0 +1,90 @@
+CREATE DATABASE Hotel;//
+use hotel;
+CREATE TABLE RoomType (
+    rooType_ID varchar(50) NOT null PRIMARY KEY,
+    roomType_Name varchar(50));//
+use hotel;
+CREATE TABLE Room(
+    roomID varchar(50) not null PRIMARY KEY,
+    rooType_ID varchar(50) NOT null,
+    FOREIGN KEY (rooType_ID) REFERENCES roomtype(rooType_ID));//
+use hotel;
+CREATE TABLE Guest(
+    guestID varchar(50) not null PRIMARY KEY,
+    firstName varchar(50),
+    LastName varchar(50),
+    email varchar(50),
+    phome char(11),
+    address varchar(50));//
+use hotel;
+CREATE TABLE Reservation(
+    reserID varchar(50) not null PRIMARY KEY,
+   guestID varchar(50),
+    roomID varchar(50),
+    reserDate date,
+    checkinDate date,
+    checkouDate date,
+     FOREIGN KEY (roomID) REFERENCES room(roomID),
+    FOREIGN KEY (guestID) REFERENCES guest(guestID));//
+how to insert data:
+use hotel;
+INSERT INTO roomtype VALUES
+('H001','Standaroom'),
+('H002','superior room'),
+('H003','deluxe room'),
+('H004','suite room');//
+use hotel;
+INSERT INTO room VALUES
+('R101','H001'),
+('R203','H001'),
+('R304','H002'),
+('R201','H004'),
+('R103','H003');//
+use hotel;
+INSERT INTO guest (guestID,firstName,LastName,phome,address)VALUES
+('G001','mayphone','PVK','2077899090','dondok'),
+('G002','phonekham','CTV','2055608769','Tammixay'),
+('G003','chanphay','SLVH','2077809098','Sivilay');//
+use hotel;
+INSERT INTO reservation(reserID,guestID,roomID,reserDate)VALUES
+('R101','G001','R203','2020/2/9'),
+('R102','G001','R201','2020/2/9'),
+('R103','G003','R304','2020/3/15'),
+('R104','G002','R103','2020/4/15');//
+how to add culum:
+use hotel;
+ALTER TABLE roomtype ADD price integer;
+use hotel;
+UPDATE roomtype SET
+price='400000.00' WHERE rooType_ID='H001';
+use hotel;
+UPDATE roomtype SET
+price='400000.00' WHERE rooType_ID='H001';
+use hotel;
+UPDATE roomtype Set 
+price='460000.00' WHERE rooType_ID='H003';
+use hotel;
+UPDATE roomtype Set 
+price='50000.00' WHERE rooType_ID='H004';//
+
+
+how to create vie:
+use hotel;
+ CREATE VIEW guest_R201 AS SELECT guest.guestID,guest.firstName,guest.LastName,guest.phome,guest.address,room.roomID FROM reservation,room,guest
+WHERE room.roomID=reservation.roomID AND guest.guestID=reservation.guestID AND reserID='R102';//
+
+
+how to count number:
+use hotel;
+SELECT COUNT(reserID) AS reservation FROM reservation;//
+how to select much:
+use hotel;
+SELECT * FROM roomtype WHERE price=(SELECT MAX(price)FROM roomtype);
+how to select min:
+use hotel;
+SELECT * FROM roomtype WHERE price=(SELECT MIN(price)FROM roomtype);
+
+
+
+
+    

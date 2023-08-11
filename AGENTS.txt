@@ -1,0 +1,62 @@
+create DATABASE Agents;//
+CREATE TABLE Agents(
+    agentID varchar(50) NOT null PRIMARY KEY,
+    agentName varchar(50), 
+    workingArea  varchar(50),
+    commission integer,
+    phone_NO integer);//
+CREATE TABLE Customers (
+    custID varchar(50)  NOT null PRIMARY KEY,
+    custName varchar(50), WorkingArea varchar(50), opening_amt integer,receive_amt integer,
+payment integer, oustanding_amt  integer , phone_No integer ,agentID varchar(50),
+    FOREIGN KEY (agentID) REFERENCES agents(agentID));//
+CREATE TABLE Orders(
+    orderID varchar(50) not null PRIMARY KEY,
+    order_amount integer,
+    advance_amount integer,
+    Date date,
+    custID varchar(50),
+    agentID varchar(50),
+    FOREIGN KEY (custID) REFERENCES customers(custID),
+    FOREIGN KEY (agentID) REFERENCES agents(agentID));//
+INSERT INTO agents VALUES
+('A007','JIMMY','VIENTIANE',0.12,02077885642),
+('A003','JOHNEY','LUANGPRABANG',0.23,02055608769),
+('A002','TOPFY','CHAMPASAK',0.15,02052939818),
+('A001','TOTO','SAYABOURY',0.2,02054629970),
+('A008','BEN','VIENTIANE',0.14,02099433547);//
+INSERT INTO customers VALUES
+('COO12','VIENG','DONGDOK',6000000.00,5000000.00,7000000.00,4000000.00,02077885642,'A008'),
+('COO02','SEVAY','TANMIXAY',3000000.00,50000000.00,2000000.00,60000000.00,02055608769,'A001'),
+('COO15','CHANTHONE','KHAMHUNG',5000000.00,70000000.00,9000000.00,3000000.00,02052945818,'A001'),
+('COO03','XAYVAN','SIVILAY',7000000.00,7000000.00,70000000.00,70000000.00,02055960670,'A003'),
+('COO08','PHOUME','AMONE',8000000.00,1100000.00,7000000.00,1200000.00,02099373847,'A007');//
+INSERT INTO orders VALUES
+('O20010',1000000.00,1000000.00,'7/02/2019','COO08','A001'),
+('O20003',2000000.00,200000.00,'8/05/2019','COO02','A008'),
+('O20005',2005000.00,900000.00,'15/02/2019','COO03','A003'),
+('O20101',4500000.00,800000.00,'19/03/2020','COO15','A002'),
+('O20015',3200000.00,150000.00,'9/06/2020','COO15','A002');//
+UPDATE customers SET
+opening_amt='4000000.00',receive_amt='50000000.00', payment='200000.00',outstanding_amt='70000000.00' 
+WHERE agentID='A001';
+
+
+ CREATE VIEW Agent_A001 as SELECT customers.custID,
+customers.custName,
+customers.WorkingArea,
+customers.phone_No,
+agents.agentID FROM  customers INNER  JOIN agents ON customers.agentID=agents.agentID WHERE customers.agentID='A001';////
+
+
+
+
+
+
+SELECT employee.epNameandLastname,employee.Address,employee.Sijhawm,employee.numberphone,employee.epCradit,employee.epOlder,employee.epEmail,employee.epPass,uploadfile.fileupload 
+FROM employee INNER JOIN uploadfile ON employee.epPass=uploadfile.epPass WHERE employee.epPass='123455';
+
+
+SELECT employee.epNameandLastname,employee.Address,employee.Sijhawm,employee.numberphone,employee.epCradit,employee.epOlder,employee.epEmail,employee.epPass,uploadfile.fileupload 
+FROM uploadfile INNER JOIN employee ON uploadfile.epPass=employee.epPass WHERE uploadfile.epPass='123455';
+

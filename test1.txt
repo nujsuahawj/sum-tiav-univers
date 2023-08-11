@@ -1,0 +1,31 @@
+create database test1;
+ use test1;//
+create TABLE student(
+    sdID varchar(50) not null  PRIMARY KEY,
+    sdName varchar(50));//
+use test1;
+create TABLE subject(
+    sjID varchar(50) not null  PRIMARY KEY,
+    sjName varchar(50) not null,
+    credit integer);//
+    use test1;
+CREATE TABLE enrollment(
+    sdID varchar(50),
+    sjID varchar(50),
+    grade varchar(3),
+    semester varchar(50),
+    yearenroll char(50));//
+use test1;
+ALTER TABLE student ADD province varchar(50);//
+use test1;
+ALTER TABLE enrollment add FOREIGN KEY (sdID) REFERENCES student(sdID);
+use test1;
+ALTER TABLE enrollment add FOREIGN KEY (sjID) REFERENCES subject(sjID);//
+
+use test1;
+INSERT INTO enrollment VALUES
+('sd02','20p','B','secon','2001');//
+use test1;
+SELECT sdID,sjID,grade FROM enrollment WHERE grade="B";//
+use test1;
+UPDATE subject SET sjName='javascript' WHERE sjID="20p";//
